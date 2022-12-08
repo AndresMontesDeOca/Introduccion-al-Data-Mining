@@ -1,0 +1,7 @@
+What kind of patterns can be mined?
+
+1 - Data Characterization (summarization) and Data Discrimination (comparison of general features)
+2 - Frequent patterns, Associations and Correlations
+3 - Classification and Regression (predictive analysis)
+4 - Cluster Analysis
+5 - Outlier Analysis

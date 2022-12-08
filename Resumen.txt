@@ -1,0 +1,48 @@
+Clase #01 -> Introduccion Data Mining, Procesos y Tareas
+Modelado Predictivo: Clasificacion y Regresion
+No Supervisado: Clustering
+Descubrimiento Reglas de Asociacion
+Que es el Data Mining? CRISP 6 Fases
+Falacias del Data Mining
+Big Data: 5 V's
+What kind of patterns can be mined?
+1 - Data Characterization (summarization) and Data Discrimination (comparison of general features)
+2 - Frequent patterns, Associations and Correlations
+3 - Classification and Regression (predictive analysis)
+4 - Cluster Analysis
+5 - Outlier Analysis
+
+Clase #02 -> Preprocesamiento de Datos: Preparar los datos para en Analisis
+Medicion y escala de las variables. Niveles de Medicion
+Tipo de Atributos Categoricos: Nominal(distintividad), Ordinal(oren)
+Tipo de Atributos Cuantitativos: Intervalo(suma/resta), Razon(multiplicacion) 
+Razon: Origen absoluto, el 0 representa ausencia del atributo que estoy midiendo
+Atributos Binarios Asimetricos: Solo la presencia es importante*
+Criticas: Variables Ciclicas (hora), Tratar un tipo de atributo como si fuera otro
+En el fondo, lo que es significativo se mide mas en terminos del dominio de la aplicacion, que en terminos de significancia estadistica
+Caracteristicas Importantes de los Datos: Dimensionalidad, Dispersion (muchos 0, escasez), Resolucion (patrones depende escala), Tamano (n del conjunto de datos)
+Problemas con la Calidad del Dato: Ruido(aleatorio), Artefactos(deterministico) y Outliers(ruido que interfiere con el analisis o el objeto de estudio propiamente dicho), 
+	Missing Values, Duplicated Data(datos independientes si provienen del mismo origen? Jose y el bono), Incorrect Data
+Medidas de Similitud [0, 1], Medidas de Disimilitud [0, infinito]. SMC vs Jaccard
+
+Clase #03a -> Clasificacion,  Arboles de Decision(voraz)
+Clasificadores Base vs de Ensamble. Confusion Matrix
+Mientras mas profundo, menos sencillo
+Algoritmo Hunt, Decisiones de Diseno: Como especificar la condicion de testeo, Medir que tan buena es. Tambien tenemos condicion de terminacion
+Metodos para condiciones de testeo: Dependen del tipo de atributo (binario, nominal, ordinal, cont)(2-vias/multi-via)
+Como determinar el mejor split: Aproximacion Voraz y Medida Impureza(Gini, Entropia/Information Gain, Error Clasificacion)
+Particionado Atributos Continuos: Discretizacion(cuantas clases y donde corto cada una), Decision Binaria(<, >)
+Calculo de GINI: Nodo Padre conocido(C0, C1, Gini) -> Split segun Condicion -> 
+			Calculo Gini por Nodo (1-P(C0)**2-P(C1)**2) -> Calculo Gini Ponderado (P(N1)*G(N1)+P(N2)*G(N2)) -> Calculo Ganancia
+No le afectan los atributos redundantes
+Tanto Gini com Entropia son sesgados ya que tienden a favorecer atributos con gran cardinalidad (ej ID Usuario). Split Binario o Penalizacion como soluciones
+Ventajas: Poco costosos, Rapida Clasificacion, Facil Interpretacion, Robustos con relacion al ruido (terminacion temprana), Maneja Atributos Redundantes
+Desventajas: Espacio de distintos arboles potenciales es grande, Aproximacion Voraz y Optimo local, Ignora interacciones entre atributos, Un atributo por frontera de desicion
+Los Arboles con muchas variables tienen problemas con la fragmentacion de datos, pierden potencia de aprendizaje
+Fronteras de Desicion: No pueden modelar relaciones complejas (mas de un atributo)
+Errores Clasificacion: Errores Entrenamiento, Testeo, Generalizacion
+Underfitting vs Overfitting
+
+Clase #03b -> Clasificacion, Metodos Bayesianos
+Clase #04 -> Clustering
+Clase #05 -> Reglas de Asociacion y Patrones Secuenciales
