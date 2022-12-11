@@ -1,0 +1,32 @@
+Conclusiones:
+
+* No hay valores nulo en ninguna de las variables
+
+* De los casi 3100 usuario, 447 se dieron de baja en algun momento del ciclo de vida del servicio, lo que representa un 14%
+
+* El codigo de area #415 posee casi el doble de usuarios que #510 y #408. Pero la distribuvion de Churn entre los 3 es similar (14%)
+
+* Hay 51 estados distitnos, el que tiene mas usuarios es WV con 96, y el que menos tiene es CA con 32. 
+
+* En todos los estados el codigo de area mayoritario es #415, con una excpecion en NH donde lo es el #408
+
+* La distribucion de los usuarios por estado esta bastante normalizada, con media y mediana cercana a 60. Pero las proporciones de Churn de cada estado son bastantes distintas en cada uno de ellos
+
+* La distribucion de la antiguedad de los usuarios es normal (si no tenemos en cuenta usuarios muy nuevos), con media cercana a los 101 dias
+
+* La desercion de clientes se hace mas marcada luego de los 90 dias iniciales y hasta los 120 aprox. Luego se reduce drasticamente
+
+* El tiempo medio hablado por telefono durante lo largo del dia/mes es normal, pero la media de las llamadas diurnas es de 180 vs las de la tarde y noche que son de 200
+
+* La distribucion de la cantidad de llamados a lo largo del dia tambien esta bastante normalizada (si no tomamos en cuenta los extermos), realizandose cerca de 100 llamadas por rango horario
+
+* Con las llamadas internacionales tenemos el mismo problema, ya que muchos usuarios no utilizan este servicio esto disminuye la normalidad de la variable
+
+* Hay una alta correlaicon en las varibales de Charge, ya que parecen ser la cantidad de minutos hablados por algun poderador de precio
+
+* Las tarifas por minuto se van reduciendo durante el transcurso del dia. Unos 17 centavos durnate el dia, entre 8 y 9 durante la tardem y entre 4 y 5 a la noche. El precio de las llamdas internacionales es dijo de 27 ctvs
+
+* La mayoria de los clientes llama al help desk entre 0 y 2 eveces, pero el que llama 4 veces ya es mas probable que se de debaja
+
+
+Recomendaciones:
