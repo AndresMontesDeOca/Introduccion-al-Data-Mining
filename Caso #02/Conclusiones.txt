@@ -10,7 +10,7 @@ Conclusiones:
 
 * En todos los estados el codigo de area mayoritario es #415, con una excpecion en NH donde lo es el #408
 
-* La distribucion de los usuarios por estado esta bastante normalizada, con media y mediana cercana a 60. Pero las proporciones de Churn de cada estado son bastantes distintas en cada uno de ellos
+* La distribucion de los usuarios por estado es Normal, con media y mediana cercana a 60. Pero las proporciones de Churn de cada estado son bastantes distintas en cada uno de ellos
 
 * La distribucion de la antiguedad de los usuarios es normal (si no tenemos en cuenta usuarios muy nuevos), con media cercana a los 101 dias
 
@@ -29,4 +29,4 @@ Conclusiones:
 * La mayoria de los clientes llama al help desk entre 0 y 2 eveces, pero el que llama 4 veces ya es mas probable que se de debaja
 
 
-Recomendaciones:
+Conslusiones :
