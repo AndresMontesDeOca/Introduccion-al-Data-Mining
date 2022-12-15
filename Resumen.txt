@@ -5,6 +5,7 @@ Descubrimiento Reglas de Asociacion
 Que es el Data Mining? CRISP 6 Fases
 Falacias del Data Mining
 Big Data: 5 V's
+Desafios DM: Escalabilidad, Alta Dimensionalidad, Heterogeneidad y Complejidad de los datos, Propiedad del Dato y Datos Distribuidos, Analisis NO Tradicional
 What kind of patterns can be mined?
 1 - Data Characterization (summarization) and Data Discrimination (comparison of general features)
 2 - Frequent patterns, Associations and Correlations
@@ -17,7 +18,7 @@ Medicion y escala de las variables. Niveles de Medicion
 Tipo de Atributos Categoricos: Nominal(distintividad), Ordinal(oren)
 Tipo de Atributos Cuantitativos: Intervalo(suma/resta), Razon(multiplicacion) 
 Razon: Origen absoluto, el 0 representa ausencia del atributo que estoy midiendo
-Atributos Binarios Asimetricos: Solo la presencia es importante*
+Atributos Binarios Asimetricos: Solo la presencia es importante. Necesito 2  Binarios Asimetricos (es_mujer, es_hombre), para representar 1 Binario ordinario (sexo)
 Criticas: Variables Ciclicas (hora), Tratar un tipo de atributo como si fuera otro
 En el fondo, lo que es significativo se mide mas en terminos del dominio de la aplicacion, que en terminos de significancia estadistica
 Caracteristicas Importantes de los Datos: Dimensionalidad, Dispersion (muchos 0, escasez), Resolucion (patrones depende escala), Tamano (n del conjunto de datos)
