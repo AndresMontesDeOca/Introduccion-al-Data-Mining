@@ -1,4 +1,4 @@
-Clase #01 -> Introduccion Data Mining, Procesos y Tareas
+Clase #01.a -> Introduccion Data Mining, Procesos y Tareas
 Modelado Predictivo: Clasificacion y Regresion
 No Supervisado: Clustering
 Descubrimiento Reglas de Asociacion
@@ -13,7 +13,7 @@ What kind of patterns can be mined?
 4 - Cluster Analysis
 5 - Outlier Analysis
 
-Clase #02 -> Preprocesamiento de Datos: Preparar los datos para en Analisis
+Clase #01.b -> Preprocesamiento de Datos: Preparar los datos para en Analisis
 Medicion y escala de las variables. Niveles de Medicion
 Tipo de Atributos Categoricos: Nominal(distintividad), Ordinal(oren)
 Tipo de Atributos Cuantitativos: Intervalo(suma/resta), Razon(multiplicacion) 
@@ -26,24 +26,105 @@ Problemas con la Calidad del Dato: Ruido(aleatorio), Artefactos(deterministico) 
 	Missing Values, Duplicated Data(datos independientes si provienen del mismo origen? Jose y el bono), Incorrect Data
 Medidas de Similitud [0, 1], Medidas de Disimilitud [0, infinito]. SMC vs Jaccard
 
-Clase #03a -> Clasificacion,  Arboles de Decision(voraz)
-Clasificadores Base vs de Ensamble. Confusion Matrix
-Mientras mas profundo, menos sencillo
-Algoritmo Hunt, Decisiones de Diseno: Como especificar la condicion de testeo, Medir que tan buena es. Tambien tenemos condicion de terminacion
-Metodos para condiciones de testeo: Dependen del tipo de atributo (binario, nominal, ordinal, cont)(2-vias/multi-via)
-Como determinar el mejor split: Aproximacion Voraz y Medida Impureza(Gini, Entropia/Information Gain, Error Clasificacion)
-Particionado Atributos Continuos: Discretizacion(cuantas clases y donde corto cada una), Decision Binaria(<, >)
+Clase #02.a -> Clasificacion,  Arboles de Decision
+Algoritmos Voraces: Se mueven en el sentido de la altura creciente, hacia la maxima ganancia en ese paso, buscanddo el minimo nivel impureza por nodo. Contra: Solo miran a un movimiento de distancia
+Clasificadores Base vs de Ensamble. Confusion Matrix. Mientras mas profundo el abrol, menos sencillo el modelo (overfitting?)
+Algoritmo de Hunt: 1) Registros Entrada misma clase(nodo hoja) | 2) Si no , Test de Atributo para subdividir(elegir una variable y un valor para subdividir los datos)
+Preguntas para el Test de Atributo: 
+	1) Cual es el metodo a elegir p/especificar la condicion de test: depende tipo atributo y de tipo de split (2-bias, multivia)
+	2) Metrica para evaluar que tan buena es esa condicion: Ganacia (GINI)
+	2.b) Condicion de Fin Ciclo (Terminaciones Tempranas): Umbrales de Corte para evitar overfitting
+Condicion Testeo Variables Ordinales con Split Binario: Hay que preservar la propiedad de orden de los valores de la variable
+Condicion Tsteo Varibales Continuas con Spit Multivia: Discretizacion 
+Medidas de Impureza: Indice Gini, Entropia, Error Clasifiacion
+Ganancia: Es el delta entre la altura de la que temrino, y la altura en donde empiezo | Diferencia entre el GINI del nodo padre, y el GINI Ponderado de la subdivision
 Calculo de GINI: Nodo Padre conocido(C0, C1, Gini) -> Split segun Condicion -> 
 			Calculo Gini por Nodo (1-P(C0)**2-P(C1)**2) -> Calculo Gini Ponderado (P(N1)*G(N1)+P(N2)*G(N2)) -> Calculo Ganancia
-No le afectan los atributos redundantes
+Como funciona el algoritmo de arboles en terminos de crecimiento: Necesita una regla de split(tipo split), y otra regla para medir cuan bueno es en el proceso de crecimiento(metrica)
+Fronteras Desicion: No pueden modelar relaciones complejas (multi-atributo). Como los arboles analizan de a una variable por vez, no puede subdividir en diagonales
+
+Clase #02.b -> Arboles de Decision
+Discretizacion Variables Continuas: 1) Cuantas Clases | 2) Donde los puntos de corte, como divido: intervalos iguales, frecuencias iguales, puntos interrupcion natural[clustering])
+Calculo GINI para Continuas: 1) ordenar valores, 2) Escanear y Actualizar la matriz de conteo e Indice GINI, 3) Elegir el split de menor GINI
 Tanto Gini com Entropia son sesgados ya que tienden a favorecer atributos con gran cardinalidad (ej ID Usuario). Split Binario o Penalizacion como soluciones
 Ventajas: Poco costosos, Rapida Clasificacion, Facil Interpretacion, Robustos con relacion al ruido (terminacion temprana), Maneja Atributos Redundantes
-Desventajas: Espacio de distintos arboles potenciales es grande, Aproximacion Voraz y Optimo local, Ignora interacciones entre atributos, Un atributo por frontera de desicion
-Los Arboles con muchas variables tienen problemas con la fragmentacion de datos, pierden potencia de aprendizaje
-Fronteras de Desicion: No pueden modelar relaciones complejas (mas de un atributo)
-Errores Clasificacion: Errores Entrenamiento, Testeo, Generalizacion
-Underfitting vs Overfitting
+Desventajas: Espacio de distintos arboles potenciales es grande, Aproximacion Voraz: Solo Optimo local, Ignora interacciones entre atributos, Un atributo por frontera de desicion
+Los Arboles son aproximaciones No-parametricas: No se hacen supuestos distribucionales
+Los Arboles con muchas variables tienen problemas con la fragmentacion de datos (cada vez tengo menos datos). Pierden potencia de aprendizaje
+Interacciones entre 2 atributos: Solos no dicen nada, pero juntos me ayudan a distinguir entre las clases
+Errores Clasificacion: Errores Entrenamiento, Errores Testeo, Errores Generalizacion. 
+Underfitting: Modelo simple, Error Train y Test grandes, Overfitting: Modelo complejo, Error Train pequeno, Error Test Grande
 
-Clase #03b -> Clasificacion, Metodos Bayesianos
-Clase #04 -> Clustering
-Clase #05 -> Reglas de Asociacion y Patrones Secuenciales
+Clase #02.c -> Errores de Clasificacion y Evaluacion del Modelo
+Estimacion Optimista del Error de Generalizacion: Se elije el modelo que tiene el menor error de entrenamiento | Pesimista: Entrenamiento  + alpha*complejidad()
+Seleccion del Modelo: Dividir Tranining en Entrenamiento (p/ construcion del modelo) y Validacion (p/ estimar el error de generalizacion). Contra: Restringe cantidad datos disponibles para aprnder
+Complejidad de un Arbol, Error Generalizacion: Egen = Etrain + omega * nodos_hoja/n_entrenamiento | omega = [0.5, 1]
+MDL: Cuanto peor sea el modelo, el costo de transmision aumenta ya que tengo qeu codificar mas cosas(modelo + ejemplos mal clasificados)
+Restringir el Proceso de Crecimiento:
+ - Pre Poda: Terminacion temprana, parar el algoritmo antes, mas rapido
+ - Post Poda: Hacer crecer completamente le arbol y luego hacer un recorte (bottom-up) para luego reemplazar el sub-arbol por un nodo hoja con menos Error Generalizacion
+Evaluacion del Modelo: Holdout vs Cross-Validation
+Clasificador basado en Reglas (if-then): LHS (condiciones) -> RHS (etiqueta de clase). 
+Problemas Clasificadores en Reglas: 
+	1) Mas de una regla aplican y apuntan a differentes clases: Mutuamente excl,  Max 1 regla | Soluciones: Lista de Decision o Esquema Votacion
+ 	2) Ninguna regla aplique a la instancia: Colectivamente exhastivas, Min 1 regla | Solucion: Clase por Defecto
+Formas Generacion Reglas: 
+ 	1) Metodo Indirecto: Extraer reglas a partir de otros modelos de clasificacion, Clase por Defecto:"", 
+ 	2) Metodo Directo: Directamente reglas en los datos,  sin pasar por el arbol, Clase por Defecto:"", Mas complejos (varias reglas, p/clases desbalanceadas,  valores faltantes)
+Ordenamiento de Reglas:
+ 	1) Basado en Reglas: Se rankean basada en alguna Metrica
+ 	2) Basado en Clases: Las reglas que pertenecen a la misma clase aparecen juntas
+Metodo Directo: Ripper (Cobertura Secuencial, mimsa logica voraz): 1) Conjunto Vacio Reglas -> 2) Learn-One-Rule -> 3) Remover Clasificados -> 4) Repetir 2) y 3)
+ 
+
+Clase #03.a -> Clustering: Asociado a un conjunto de definiciones operarivas previas, no todos los datos se pueden clusterizar
+Encontrar grupos de manera tal que cada objeto del grupo sea similar entre si(distancia intra-cluster), pero bien distinto del resto (distancia inter-cluster)
+Conglomeracion Particional, subconjuntos no superpuestos(un solo cluster, elipse desviacion std) | Conglomeracion Jerarcica, clusters anidados organizados en arbol jerarquico
+Efectos Pimer Orden (Intensidad, puntos por unidad area), Efectos Segundo Orden (dependencia espacial, estructura, relacion entre puntos)
+Patrones Agrupados, Dispersos (maximizacion de la potencia cubritiva de la cantidad de puntos, misma densidad) o Aleatorios
+Indice de KNN(IVC): Comparando contra un Patron Aleatorio, si la distancia promedio es <1 (agrupamiento), si la distancia es >1 (dispersion)
+Desviacion Standard: R2 es un disco, R3 es una esfera
+Centro Medio y Distancia Standard iguales, pero son insuficientes para entender el patron (ej discos con datos conglomerados y dispersos)
+Analaisis de Cuadrantes: Tamano, Origen y Forma
+Aproximaciones: 1) Llevar del problema de Puntos a problema de Area(datos agregados?), 2) 
+El quivalente bidimensional de la desviacion std no es el rectangulo de dispercion, si lo es la distancia standard
+Rectangulo de Dispercion, generalizacion Natural de la desviacin en X y desviaxion en Y
+
+Clase #04 -> Mapas Tematicos: Combinacion Estructura Base (informacion geometrica), Tipos de Datos (informacion semantica)
+Chart Tipo de Nivel de Medicion * Tipo de Variable
+Cuantas clases discretizar: Huntsberger Method (1+3,3*Log10(N)), Brooks-Carruthers Method (5*Log10(N))
+Intervalos Iguales, Iguales Ajustados(10%), Cuantiles, Desv Std, Puntos Interr Naturales/Jenks(analogo Clustering), Interv Ad-Hoc
+Puntos Interrupcion Naturales/Fisher-Jenks: Minimizar las Desviaciones Cuadraticas de la media de la clase
+Tipos de Clusters:
+	- Bien Separados: No necesitan ser globulares
+	- Basados en Centros: 
+	- Contiguos (knn o transitivo):
+	- Densidad:
+Clustering por K-Means(particiones): Aprox particional basada en prototipos, k hiperparametro, centroides iniciales, dependiente de la posicion inicial centroides, que metrica distancia(Euclidea)
+Evaluacion KMeans: Metrica mas comun SSE (centro medio)
+Problemas K-Means: Cuando Clusters son Diferente Tamano, Densidad, Formas no regulares, o con Outliers puede generar clusters vacios
+Correcion Limitaciones K-Means: Elegir k mas grande, Multiples Corridas, Clust Jerarquico p// determinar los centroids iniciales (computacionalmente caro)
+Pre-Procesamiento: Normalizar Datos y eliminar valores extremos, Post-Procesamiento: Eliminar Clusters Pequenos (outliers), Fusionar Clust Cercanos
+Clustering Jerarquico(jerarquico): Conjunto de clusters anidados organizados en un arbol jerarquico. No es necesario k de entrada
+Matriz de Similitud/Distancia/Proximidad: Primer cosa para hacer, es la base de todo	
+	Aglomerativo: Comienza con los puntos como centros individuales, y en cada paso fusiona los dos mas proximos hasta que termina con un cluster final
+	Divisivo: Comienza con un cluster, y en cada paso va partiendo un cluster hast que cada uno contenga un punto individual
+Definicion Distancia entre clusters: 
+	- Min (Single Link): Dos puntos mas cercanos entre los clusters. Bueno p/ formas no elipitcas, sensible al ruido
+	- Max (Complete Link): Dos puntos mas alejados entre los clusters. No es sensible al ruido, tiende a romper clusters grandes, sesgado clusters globulares
+ 	- Promedio Grupo: Compromiso entre Min y Max, menos sensible al ruido y outliers, pero sesgado hacia clusters globulares
+	- Ward: Similar al Promedio Grupo si las distancias entre puntos se elevan al cuadrado, analogo jerarquico a k-means (se utiliza para la inicializacion)
+Problema Clust Jerarquico: No optimiza una funcion objetivo global, decide localmente
+Beneficios: Puede trabajar con clusters de diferentes tamanos, Outliers son problema solo en Ward, Se usan cuando la jeraquia importa (taxonomia)
+Clustering por DBSCAN(basado en densidad, Eps y MinPts): Densidad/MinPts = Cantidad de puntos dentro Epsilon 
+	- Punto Nucleo: Al menos x puntos dentro Eps
+	- Punto Frontera: No cataloga como Nucleo, pero esta tocado por uno
+	- Punto Noise: Resto de los puntos
+Pasos DBSCAN: 1) Etiquetar Puntos, 2) Eliminar Ruido, 3) Colocar borde entre todos P nucleo dentro Eps de cada uno, 4) Hacer cada grupo de P. Nucleo un Cluster
+Beneficios DBSCAN: Resistente Ruido, Clusters de diferentes tamanos y formas
+Problemas DBSCAN: Alta Dimensionalidad, Densidades Variables, Computacionalmente Costoso en Alta Dimensionalidad
+Validez Conglomerados(dependen del ojo del observador): Evaluamos el conjunto TODOS clusters? O solo el que me interesa?
+	- Indices Internos(No Supervisados): A partir de los propios datos, sin fuentes externas (SSE, Cohesion(proximidad intra-cluster) y Separacion(proximidad extra-cluster))
+	- Indices Externos(Supervisados): Compara con etiquetas de clase externas(entropia)
+	- Indices Relativos: Compara dos conjuntos o dos clusters
+Minimizar Cohesion(SSE) es quivalente a Maximizar la Separacion(SSB)
